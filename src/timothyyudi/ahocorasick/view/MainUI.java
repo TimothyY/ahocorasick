@@ -1,5 +1,6 @@
 package timothyyudi.ahocorasick.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -8,8 +9,6 @@ import timothyyudi.ahocorasick.controller.AhoCorasick;
 import timothyyudi.ahocorasick.controller.Utility;
 
 public class MainUI {
-
-	
 	
 	public static void main(String[] args){
 		
@@ -19,8 +18,11 @@ public class MainUI {
 		
 		ArrayList<String> keywords = new ArrayList<String>(); //prepare keywords
 		try {
-			//keywords = util.readKeyword("c:/temp/snortrules.txt"); //load keywords from file
-			keywords = util.readKeyword("c:/temp/kjvkeyword_simple.txt"); //load keywords from file
+//			keywords = util.readKeyword("c:/temp/snortrules.txt"); //load keywords from file
+//			keywords = util.readKeyword("c:/temp/kjvkeyword_simple.txt"); //load keywords from file
+			File f = new File("src/timothyyudi/ahocorasick/asset/kjvkeyword_simple.txt");
+			keywords = util.readKeyword(f); //load keywords from file
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,8 +41,10 @@ public class MainUI {
 		
 		String inputString="";	//prepare input string
 		try {
-			//inputString = util.readInputString("c:/temp/inputString2.txt", Charset.defaultCharset()); //load input string from file
-			inputString = util.readInputString("c:/temp/kjv.txt", Charset.defaultCharset()); //load input string from file
+//			inputString = util.readInputString("c:/temp/inputString2.txt", Charset.defaultCharset()); //load input string from file
+//			inputString = util.readInputString("c:/temp/kjv.txt", Charset.defaultCharset()); //load input string from file
+			File f = new File("src/timothyyudi/ahocorasick/asset/kjv.txt");
+			inputString = util.readInputString(f, Charset.defaultCharset());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
