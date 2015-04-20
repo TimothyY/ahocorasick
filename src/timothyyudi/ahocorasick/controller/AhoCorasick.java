@@ -127,7 +127,7 @@ public class AhoCorasick {
 	 * @throws UnsupportedEncodingException 
 	 * @throws FileNotFoundException */
 	public void writeOutput() throws FileNotFoundException, UnsupportedEncodingException{
-		PrintWriter writer = new PrintWriter("c:/temp/AhoCorasickHashMapOutput.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("src/timothyyudi/ahocorasick/asset/AhoCorasickOutput.txt", "UTF-8");
 		for (Output output : outputMap.values()) {
 			writer.println("Found "+output.getOutputString()+" @line: "+output.getLineNumber()+"("+output.getOutputStartPoint()+"-"+output.getOutputEndPoint()+")");
 		}
