@@ -14,25 +14,42 @@ public class AhoCorasick {
 
 	State root = new State();
 	State currState;
-	int keywordInsertionCounter, lineNumberCounter;
+	int keywordInsertionCounter, lineNumberCounter, columnNumberCounter;
 	String tempOutputStr = "";
 	String reversedTempOutputStr = "";
 	HashMap<String, Output> outputMap = new HashMap<>();
+	long ahoCorasickTimeTotal=0;
+	long ahoCorasickTimeFragment=0;
+	long algoStart, algoEnd;
 	
 	/**A function to match input string against constructed AhoCorasick trie*/
 	public void patternMatching(String inputString){
 		currState = root;
 		lineNumberCounter=1;
+		columnNumberCounter=0;
+		
 		for (int i = 0; i < inputString.length(); i++) { //as long as there is an input
-			if(inputString.charAt(i)=='\n')lineNumberCounter++;
+			
+			columnNumberCounter++;
+			if(inputString.charAt(i)=='\n'){
+				lineNumberCounter++;
+				columnNumberCounter=1;
+			}
+			
+			algoStart=System.currentTimeMillis();
+			
 			while (goTo(currState, inputString.charAt(i))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
 				currState= failFrom(currState);
 			}
 			if(goTo(currState, inputString.charAt(i))!=null){
 				currState = goTo(currState, inputString.charAt(i)); //set the current node to the result of go to function
-				prepareOutput(currState,lineNumberCounter, i);
+				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 			}
+			algoEnd=System.currentTimeMillis();
+			ahoCorasickTimeFragment=algoEnd-algoStart;
+			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
 		}
+		writeAhoCorasickTime(ahoCorasickTimeTotal);
 	}
 	
 	/**A function to move from 1 node of a trie to the others based on next input character*/
@@ -120,7 +137,7 @@ public class AhoCorasick {
 			state=state.getParent();
 		}
 		reversedTempOutputStr = new StringBuilder(tempOutputStr).reverse().toString();
-		outputMap.put(reversedTempOutputStr+"l"+lineNumber+"c"+endPoint, new Output(reversedTempOutputStr, lineNumber, endPoint-reversedTempOutputStr.length()+2, endPoint+1));
+		outputMap.put(reversedTempOutputStr+"l"+lineNumber+"c"+endPoint, new Output(reversedTempOutputStr, lineNumber, endPoint-reversedTempOutputStr.length(), endPoint));
 	}
 	
 	/**Write output to output.txt
@@ -134,4 +151,7 @@ public class AhoCorasick {
 		writer.close();
 	}
 	
+	public void writeAhoCorasickTime(long ahoCorasickTime){
+		System.out.println("[TRUE] AhoCorasick Time: "+ahoCorasickTime+" ms");
+	}
 }
