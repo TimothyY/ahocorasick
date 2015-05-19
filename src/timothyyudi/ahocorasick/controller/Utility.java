@@ -23,17 +23,18 @@ public class Utility {
 			
 			while (scanner.hasNext()){
 				list.add(scanner.next().trim()); //ambil per spasi.
-			/*while (scanner.hasNextLine()){
-			    temp = scanner.nextLine();
-			    firstQuotes=temp.indexOf("\"")+1;
-			    secondQuotes=temp.indexOf("\"", firstQuotes); //to be used on snort rules message [TEMP]
-			    //secondQuotes=temp.indexOf("\"", firstQuotes)+1; //to be used in snort rules content
-			    thirdQuotes=temp.indexOf("\"", secondQuotes)+1;
-			    fourthQuotes=temp.indexOf("\"", thirdQuotes);
-			    if(firstQuotes!=0){
-			    	list.add(temp.substring(firstQuotes, secondQuotes).trim()); //to be used on snort rules message [TEMP]
-			    	//list.add(temp.substring(thirdQuotes, fourthQuotes).trim()); //to be used in snort rules content
-			    }*/
+//			while (scanner.hasNextLine()){
+//			    temp = scanner.nextLine();
+//			    firstQuotes=temp.indexOf("\"")+1;
+//			    secondQuotes=temp.indexOf("\"", firstQuotes); //to be used on snort rules message [TEMP]
+////			    secondQuotes=temp.indexOf("\"", firstQuotes)+1; //to be used in snort rules content
+////			    thirdQuotes=temp.indexOf("\"", secondQuotes)+1;
+////			    fourthQuotes=temp.indexOf("\"", thirdQuotes);
+//			    if(firstQuotes!=0){
+//			    	list.add(temp.substring(firstQuotes, secondQuotes).trim()); //to be used on snort rules message [TEMP]
+//			    	System.out.println(temp.substring(firstQuotes, secondQuotes).trim());
+////			    	list.add(temp.substring(thirdQuotes, fourthQuotes).trim()); //to be used in snort rules content
+//			    }
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
