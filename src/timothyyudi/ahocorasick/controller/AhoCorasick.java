@@ -65,8 +65,8 @@ public class AhoCorasick {
 	
 	/**Prepare AhoCorasick goto function/ successful state of AhoCorasick trie*/
 	public void prepareGoToFunction(ArrayList<String> keywords){
-		//State currNode = root;
 		for (int i = 0; i < keywords.size(); i++) {
+			System.out.println("inserting "+keywords.get(i));
 			enterKeyword(keywords.get(i));
 		}
 	}

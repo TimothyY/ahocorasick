@@ -20,10 +20,9 @@ public class MainUI {
 		try {
 //			keywords = util.readKeyword("c:/temp/snortrules.txt"); //load keywords from file
 //			keywords = util.readKeyword("c:/temp/kjvkeyword_simple.txt"); //load keywords from file
-			File f = new File("src/timothyyudi/ahocorasick/asset/kjvkeyword_simple.txt");
-//			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
+//			File f = new File("src/timothyyudi/ahocorasick/asset/kjvkeyword_simple.txt");
+			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
 			keywords = util.readKeyword(f); //load keywords from file
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,8 +43,8 @@ public class MainUI {
 		try {
 //			inputString = util.readInputString("c:/temp/inputString2.txt", Charset.defaultCharset()); //load input string from file
 //			inputString = util.readInputString("c:/temp/kjv.txt", Charset.defaultCharset()); //load input string from file
-			File f = new File("src/timothyyudi/ahocorasick/asset/kjv.txt");
-//			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
+//			File f = new File("src/timothyyudi/ahocorasick/asset/kjv.txt");
+			File f = new File("src/timothyyudi/ahocorasick/asset/snortrulesInputFile.txt");
 			inputString = util.readInputString(f, Charset.defaultCharset());
 		} catch (IOException e) {
 			e.printStackTrace();
