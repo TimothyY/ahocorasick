@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import timothyyudi.ahocorasick.controller.AhoCorasick;
 import timothyyudi.ahocorasick.controller.Utility;
@@ -16,12 +17,13 @@ public class MainUI {
 		
 		Utility util = new Utility();
 		
-		ArrayList<String> keywords = new ArrayList<String>(); //prepare keywords
+		HashSet<String> keywords = new HashSet(); //prepare keywords
 		try {
 //			keywords = util.readKeyword("c:/temp/snortrules.txt"); //load keywords from file
 //			keywords = util.readKeyword("c:/temp/kjvkeyword_simple.txt"); //load keywords from file
 //			File f = new File("src/timothyyudi/ahocorasick/asset/kjvkeyword_simple.txt");
-			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
+			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword.txt");
+//			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
 			keywords = util.readKeyword(f); //load keywords from file
 		} catch (Exception e) {
 			e.printStackTrace();

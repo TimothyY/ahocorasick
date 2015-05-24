@@ -1,10 +1,13 @@
 package timothyyudi.ahocorasick.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import timothyyudi.ahocorasick.model.Output;
@@ -64,10 +67,10 @@ public class AhoCorasick {
 	}
 	
 	/**Prepare AhoCorasick goto function/ successful state of AhoCorasick trie*/
-	public void prepareGoToFunction(ArrayList<String> keywords){
-		for (int i = 0; i < keywords.size(); i++) {
-			System.out.println("inserting "+keywords.get(i));
-			enterKeyword(keywords.get(i));
+	public void prepareGoToFunction(HashSet<String> keywords){
+		for (String string : keywords) {
+			System.out.println("inserting "+string);
+			enterKeyword(string);
 		}
 	}
 	
@@ -89,6 +92,7 @@ public class AhoCorasick {
 			}
 			keywordInsertionCounter++;
 		}
+
 	}
 	
 	/**Create the fail fall back state of AhoCorasick trie*/
