@@ -25,11 +25,13 @@ public class AhoCorasick {
 	long ahoCorasickTimeFragment=0;
 	long algoStart, algoEnd;
 	
+	public static ArrayList<Output> outputList = new ArrayList<>();
+	
 	/**A function to match input string against constructed AhoCorasick trie*/
 	public void patternMatching(String inputString){
 		currState = root;
 		lineNumberCounter=1;
-		columnNumberCounter=0;
+		columnNumberCounter=1;
 		
 		for (int i = 0; i < inputString.length(); i++) { //as long as there is an input
 			
@@ -41,11 +43,12 @@ public class AhoCorasick {
 			
 			algoStart=System.currentTimeMillis();
 			
-			while (goTo(currState, inputString.charAt(i))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
+			while (goTo(currState, Character.toString(inputString.charAt(i)))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
 				currState= failFrom(currState);
 			}
-			if(goTo(currState, inputString.charAt(i))!=null){
-				currState = goTo(currState, inputString.charAt(i)); //set the current node to the result of go to function
+			if(goTo(currState, Character.toString(inputString.charAt(i)))!=null){
+				System.out.println("Check: "+Character.toString(inputString.charAt(i)));
+				currState = goTo(currState, Character.toString(inputString.charAt(i))); //set the current node to the result of go to function
 				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 			}
 			algoEnd=System.currentTimeMillis();
@@ -56,8 +59,8 @@ public class AhoCorasick {
 	}
 	
 	/**A function to move from 1 node of a trie to the others based on next input character*/
-	private State goTo(State node, char nextInputChar){
-		return node.getNextStateCollection().get(Character.toString(nextInputChar));
+	private State goTo(State node, String nextInputChar){
+		return node.getNextStateCollection().get(nextInputChar);
 	}
 	
 	/**A function to move from 1 node of a trie to it's fail node*/
@@ -69,7 +72,6 @@ public class AhoCorasick {
 	/**Prepare AhoCorasick goto function/ successful state of AhoCorasick trie*/
 	public void prepareGoToFunction(HashSet<String> keywords){
 		for (String string : keywords) {
-			System.out.println("inserting "+string);
 			enterKeyword(string);
 		}
 	}
@@ -79,16 +81,16 @@ public class AhoCorasick {
 		currState = root;
 		keywordInsertionCounter = 0;
 
-		while(keywordInsertionCounter<keyword.length() && goTo(currState, keyword.charAt(keywordInsertionCounter))!=null){ //while state already exist then go there.
-			currState = goTo(currState, keyword.charAt(keywordInsertionCounter));
+		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))!=null){ //while state already exist then go there.
+			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
 			keywordInsertionCounter++;
 		}
 	
-		while(keywordInsertionCounter<keyword.length() && goTo(currState, keyword.charAt(keywordInsertionCounter))==null){ //while state doesnt exist then create new node and go there
-			currState.getNextStateCollection().put(Character.toString(keyword.charAt(keywordInsertionCounter)), new State(currState, keyword.charAt(keywordInsertionCounter), root));
-			currState = goTo(currState, keyword.charAt(keywordInsertionCounter));
+		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))==null){ //while state doesnt exist then create new node and go there
+			currState.getNextStateCollection().put(Character.toString(keyword.charAt(keywordInsertionCounter)), new State(currState, Character.toString(keyword.charAt(keywordInsertionCounter)), root));
+			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
 			if(keywordInsertionCounter==keyword.length()-1){
-				currState.setFullWord(true);
+				currState.setFullKeyword(keyword);
 			}
 			keywordInsertionCounter++;
 		}
@@ -122,37 +124,17 @@ public class AhoCorasick {
 	}
 	
 	/**prepare output for the matching keywords found*/
-	private void prepareOutput(State currNode,int lineNumber, int endPoint){
-		if(currNode.isFullWord()==true){//jika currNode = fullword
-			traceAncestorAndPrint(currNode, lineNumber, endPoint);//telusuri sampai atas dan cetak
+	private void prepareOutput(State state,int lineNumber, int endColumnNumber){
+		if(state.getFullKeyword()!=null){//jika currNode = fullword
+			outputList.add(new Output(state.getFullKeyword(), lineNumber, endColumnNumber-(state.getFullKeyword().length()), endColumnNumber-1));
 		}
 		
-		if(!failFrom(currNode).equals(root)){//jika state tersebut punya fail node yang bukan root
-			if(failFrom(currNode).isFullWord()==true){//jika failState == fullword
-				traceAncestorAndPrint(failFrom(currNode), lineNumber, endPoint);//telusuri failState sampai atas dan cetak
+		while(!failFrom(state).equals(root)){//jika state tersebut punya fail node yang bukan root
+			state = failFrom(state);
+			if(state.getFullKeyword()!=null){//jika failState == fullword
+				outputList.add(new Output(state.getFullKeyword(), lineNumber, endColumnNumber-(state.getFullKeyword().length()), endColumnNumber-1));
 			}
 		}
-	}
-	
-	/**Trace the ancestor of a node and print it sequentially*/
-	private void traceAncestorAndPrint(State state, int lineNumber, int endPoint){
-		while(!state.equals(root)){
-			tempOutputStr=tempOutputStr+state.getStateContentCharacter();
-			state=state.getParent();
-		}
-		reversedTempOutputStr = new StringBuilder(tempOutputStr).reverse().toString();
-		outputMap.put(reversedTempOutputStr+"l"+lineNumber+"c"+endPoint, new Output(reversedTempOutputStr, lineNumber, endPoint-reversedTempOutputStr.length(), endPoint));
-	}
-	
-	/**Write output to output.txt
-	 * @throws UnsupportedEncodingException 
-	 * @throws FileNotFoundException */
-	public void writeOutput() throws FileNotFoundException, UnsupportedEncodingException{
-		PrintWriter writer = new PrintWriter("src/timothyyudi/ahocorasick/asset/AhoCorasickOutput.txt", "UTF-8");
-		for (Output output : outputMap.values()) {
-			writer.println("Found "+output.getOutputString()+" @line: "+output.getLineNumber()+"("+output.getOutputStartPoint()+"-"+output.getOutputEndPoint()+")");
-		}
-		writer.close();
 	}
 	
 	public void writeAhoCorasickTime(long ahoCorasickTime){

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -59,6 +60,17 @@ public class Utility {
 		rf.read(encoded);
 		rf.close();
 		return new String(encoded, encoding).toLowerCase();
+	}
+	
+	/**Write output to output.txt
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException */
+	public void writeOutput(ArrayList<Output> outputList) throws FileNotFoundException, UnsupportedEncodingException{
+		PrintWriter writer = new PrintWriter("src/timothyyudi/ahocorasick/asset/AhoCorasickOutput.txt", "UTF-8");
+		for (Output output : outputList) {
+			writer.println("Found "+output.getOutputString()+" @line: "+output.getLineNumber()+"("+output.getOutputStartPoint()+"-"+output.getOutputEndPoint()+")");
+		}
+		writer.close();
 	}
 	
 }

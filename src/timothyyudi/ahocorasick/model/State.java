@@ -1,48 +1,49 @@
 package timothyyudi.ahocorasick.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class State {
 
-	char stateContentCharacter;
-	boolean fullWord;
+	String stateContentCharacter;
+	String fullKeyword;
 	State parent, failState;
 	HashMap<String, State> nextStateCollection;
 	
 	/**Called when root is created.*/
 	public State(){
 		super();
-		this.stateContentCharacter = '\u0000';
-		this.fullWord = false;
-		this.parent = this;
-		this.nextStateCollection = new HashMap<String, State>();
-		this.failState = this;
-	}
-	
-	/**Called each time a new state is created*/
-	public State(State parent, char stateContentCharacter, State failState){
-		super();
-		this.stateContentCharacter = stateContentCharacter;
-		this.fullWord = false;
-		this.parent = parent;
-		this.nextStateCollection = new HashMap<String, State>();
-		this.failState = failState;
+		this.parent = null;
+		this.stateContentCharacter = null;
+		this.failState = null;
+		this.fullKeyword = null;
+		this.nextStateCollection = new HashMap<>();
 	}
 
-	public char getStateContentCharacter() {
+	/**Called each time a new state is created*/
+	public State(State parent, String stateContentCharacter, State failState){
+		super();
+		this.parent = parent;
+		this.stateContentCharacter = stateContentCharacter;
+		this.failState = failState;
+		this.fullKeyword = null;
+		this.nextStateCollection = new HashMap<>();
+	}
+
+	public String getStateContentCharacter() {
 		return stateContentCharacter;
 	}
 
-	public void setStateContentCharacter(char stateContentCharacter) {
+	public void setStateContentCharacter(String stateContentCharacter) {
 		this.stateContentCharacter = stateContentCharacter;
 	}
 
-	public boolean isFullWord() {
-		return fullWord;
+	public String getFullKeyword() {
+		return fullKeyword;
 	}
 
-	public void setFullWord(boolean fullWord) {
-		this.fullWord = fullWord;
+	public void setFullKeyword(String fullKeyword) {
+		this.fullKeyword = fullKeyword;
 	}
 
 	public State getParent() {
@@ -68,5 +69,5 @@ public class State {
 	public void setNextStateCollection(HashMap<String, State> nextStateCollection) {
 		this.nextStateCollection = nextStateCollection;
 	}
-
+		
 }
