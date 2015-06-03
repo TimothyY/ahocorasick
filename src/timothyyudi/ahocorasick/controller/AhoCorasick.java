@@ -47,7 +47,6 @@ public class AhoCorasick {
 				currState= failFrom(currState);
 			}
 			if(goTo(currState, Character.toString(inputString.charAt(i)))!=null){
-				System.out.println("Check: "+Character.toString(inputString.charAt(i)));
 				currState = goTo(currState, Character.toString(inputString.charAt(i))); //set the current node to the result of go to function
 				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 			}
