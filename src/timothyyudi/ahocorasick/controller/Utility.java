@@ -39,9 +39,10 @@ public class Utility {
 //			    if(firstQuotes!=0){
 ////			    	list.add(temp.substring(firstQuotes, secondQuotes).trim()); //to be used on snort rules message [TEMP]
 //					String tempStr = temp.substring(thirdQuotes, fourthQuotes).trim();
-//			    	if(tempStr.length()>6)
-//						list.add(tempStr); //ambil per spasi.
-//			    	
+//			    	if(tempStr.length()>6){
+//			    		list.add(tempStr); //ambil per spasi.
+//			    		System.out.println("inserting "+tempStr);
+//			    	}
 //			    }
 			}
 			scanner.close();
