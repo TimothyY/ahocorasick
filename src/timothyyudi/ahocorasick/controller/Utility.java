@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -20,15 +18,17 @@ public class Utility {
 	/**read keyword file from snort rules*/
 	public HashSet<String> readKeyword(File f){
 		Scanner scanner;
-		HashSet<String> list = new HashSet();
-		String temp;
-		int firstQuotes=0, secondQuotes=0, thirdQuotes=0, fourthQuotes=0;
+		HashSet<String> list = new HashSet<String>();
+
 		try {
 			scanner = new Scanner(f);
 			
 			while (scanner.hasNextLine()){
 				String tempStr = scanner.nextLine().trim();
 				list.add(tempStr); //ambil per spasi.
+				
+//				String temp;
+//				int firstQuotes=0, secondQuotes=0, thirdQuotes=0, fourthQuotes=0;
 //			while (scanner.hasNextLine()){
 //			    temp = scanner.nextLine();
 //			    firstQuotes=temp.indexOf("\"")+1;
@@ -55,12 +55,11 @@ public class Utility {
 	
 	/**Read input string file as inputString*/
 	public String readInputString(File f, Charset encoding) throws IOException {
-//		byte[] encoded = Files.readAllBytes(Paths.get(f));
 		RandomAccessFile rf = new RandomAccessFile(f, "r");
 		byte[] encoded = new byte[(int)rf.length()];
 		rf.read(encoded);
 		rf.close();
-		return new String(encoded, encoding).toLowerCase();
+		return new String(encoded, encoding);
 	}
 	
 	/**Write output to output.txt

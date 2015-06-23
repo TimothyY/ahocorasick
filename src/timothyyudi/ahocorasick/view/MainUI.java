@@ -3,7 +3,6 @@ package timothyyudi.ahocorasick.view;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import timothyyudi.ahocorasick.controller.AhoCorasick;
@@ -17,15 +16,15 @@ public class MainUI {
 		
 		Utility util = new Utility();
 		
-		HashSet<String> keywords = new HashSet(); //prepare keywords
+		HashSet<String> keywords = new HashSet<String>(); //prepare keywords
 		try {
 //			keywords = util.readKeyword("c:/temp/snortrules.txt"); //load keywords from file
 //			keywords = util.readKeyword("c:/temp/kjvkeyword_simple.txt"); //load keywords from file
 //			File f = new File("src/timothyyudi/ahocorasick/asset/kjvkeyword_simple.txt");
 //			File f = new File("src/timothyyudi/ahocorasick/asset/snortrules.txt");
-//			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword.txt");
+			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword.txt");
 //			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword2.txt");
-			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword3.txt");
+//			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword3.txt");
 //			File f = new File("src/timothyyudi/ahocorasick/asset/SimpleDatabase.txt");
 			keywords = util.readKeyword(f); //load keywords from file
 		} catch (Exception e) {
@@ -67,7 +66,7 @@ public class MainUI {
 		
 		timer=System.currentTimeMillis();
 		try {
-			util.writeOutput(ahoCorasick.outputList);
+			util.writeOutput(AhoCorasick.outputList);
 		} catch (Exception e) {
 			System.out.println("writeOutput Error: "+e);
 		}
