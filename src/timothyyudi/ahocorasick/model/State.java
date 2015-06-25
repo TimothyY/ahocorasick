@@ -1,7 +1,6 @@
 package timothyyudi.ahocorasick.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class State {
 
