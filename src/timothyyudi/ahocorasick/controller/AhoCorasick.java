@@ -49,7 +49,7 @@ public class AhoCorasick {
 			ahoCorasickTimeFragment=algoEnd-algoStart;
 			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
 		}
-		writeAhoCorasickTime(ahoCorasickTimeTotal);
+		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
 	}
 	
 	/**A function to move from 1 node of a trie to the others based on next input character*/
@@ -130,7 +130,4 @@ public class AhoCorasick {
 		}
 	}
 	
-	public void writeAhoCorasickTime(long ahoCorasickTime){
-		System.out.println("[TRUE] AhoCorasick Time: "+ahoCorasickTime+" ms");
-	}
 }

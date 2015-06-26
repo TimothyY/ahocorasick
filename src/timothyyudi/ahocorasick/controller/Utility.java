@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import timothyyudi.ahocorasick.model.Output;
+import timothyyudi.ahocorasick.view.MainUI;
 
 public class Utility {
 
@@ -71,6 +72,10 @@ public class Utility {
 			writer.println("Found "+output.getOutputString()+" @line: "+output.getLineNumber()+"("+output.getOutputStartPoint()+"-"+output.getOutputEndPoint()+")");
 		}
 		writer.close();
+	}
+	
+	public static void writeAhoCorasickTime(long ahoCorasickTime){
+		MainUI.processingTimer = ahoCorasickTime;
 	}
 	
 }

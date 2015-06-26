@@ -15,9 +15,9 @@ import timothyyudi.ahocorasick.controller.Utility;
 
 public class MainUI {
 	
+	public static long preprocessingTimer, processingTimer;
+	
 	public static void main(String[] args){
-		
-		long preprocessingTimer, processingTimer;
 		
 		Utility util = new Utility();
 		
@@ -106,9 +106,8 @@ public class MainUI {
 		
 		System.out.println("Aho Corasick is READY....BEGIN pattern matching...");
 		
-		processingTimer=System.currentTimeMillis();
 		ahoCorasick.patternMatching(inputString);
-		processingTimer = System.currentTimeMillis() - processingTimer;
+		
 		System.out.println("Finish multi-pattern matching in "+processingTimer + " millisecond(s)");
 		
 		System.out.println("DONE matching...WRITING results now...");
