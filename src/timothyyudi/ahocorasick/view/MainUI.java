@@ -78,7 +78,7 @@ public class MainUI {
 		
 		AhoCorasick ahoCorasick = new AhoCorasick();
 		
-		preprocessingTimer=System.currentTimeMillis();
+		preprocessingTimer = System.currentTimeMillis();
 		ahoCorasick.prepareGoToFunction(keywords); //prepare ahocorasick goTo function
 		ahoCorasick.prepareFailFromFunction(); //prepare ahocorasick fail function
 		preprocessingTimer = System.currentTimeMillis() - preprocessingTimer;
@@ -118,7 +118,6 @@ public class MainUI {
 		} catch (Exception e) {
 			System.out.println("writeOutput Error: "+e);
 		}
-		
 		System.out.println("COMPLETED");
 		
 		try {
