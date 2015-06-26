@@ -88,7 +88,6 @@ public class AhoCorasick {
 			}
 			keywordInsertionCounter++;
 		}
-
 	}
 	
 	/**Create the fail fall back state of AhoCorasick trie*/

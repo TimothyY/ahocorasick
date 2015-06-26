@@ -1,7 +1,12 @@
 package timothyyudi.ahocorasick.view;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.HashSet;
 
@@ -12,7 +17,7 @@ public class MainUI {
 	
 	public static void main(String[] args){
 		
-		long timer;
+		long preprocessingTimer, processingTimer;
 		
 		Utility util = new Utility();
 		
@@ -65,7 +70,7 @@ public class MainUI {
 //			File f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword4000.txt");
 //			File f = new File("src/timothyyudi/ahocorasick/asset/snortrulessimplekeyword.txt");
 //			File f = new File("src/timothyyudi/ahocorasick/asset/SimpleDatabase.txt");
-			util.readKeyword(f); //load keywords from file
+			keywords=util.readKeyword(f); //load keywords from file
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,15 +78,19 @@ public class MainUI {
 		
 		AhoCorasick ahoCorasick = new AhoCorasick();
 		
-		timer=System.currentTimeMillis();
+		preprocessingTimer=System.currentTimeMillis();
 		ahoCorasick.prepareGoToFunction(keywords); //prepare ahocorasick goTo function
-		timer = System.currentTimeMillis() - timer;
-		System.out.println("Finish creating trie in "+timer + " millisecond(s)");
-		
-		timer=System.currentTimeMillis();
 		ahoCorasick.prepareFailFromFunction(); //prepare ahocorasick fail function
-		timer = System.currentTimeMillis() - timer;
-		System.out.println("Finish creating fail function in "+timer + " millisecond(s)");
+		preprocessingTimer = System.currentTimeMillis() - preprocessingTimer;
+		System.out.println("Finish preprocessing in "+preprocessingTimer + " millisecond(s)");
+		
+		// Get the Java runtime
+		Runtime runtime = Runtime.getRuntime();
+		// Run the garbage collector
+		runtime.gc();
+		// Calculate the used memory
+		long preprocessingMemory = runtime.totalMemory() - runtime.freeMemory();
+		System.out.println("Used memory for preprocessing in Bytes: " + preprocessingMemory);
 		
 		String inputString="";	//prepare input string
 		try {
@@ -97,31 +106,35 @@ public class MainUI {
 		
 		System.out.println("Aho Corasick is READY....BEGIN pattern matching...");
 		
-		timer=System.currentTimeMillis();
+		processingTimer=System.currentTimeMillis();
 		ahoCorasick.patternMatching(inputString);
-		timer = System.currentTimeMillis() - timer;
-		System.out.println("Finish multi-pattern matching in "+timer + " millisecond(s)");
+		processingTimer = System.currentTimeMillis() - processingTimer;
+		System.out.println("Finish multi-pattern matching in "+processingTimer + " millisecond(s)");
 		
-		System.out.println("DONE matching...WRITING results...");
+		System.out.println("DONE matching...WRITING results now...");
 		
-		timer=System.currentTimeMillis();
 		try {
 			util.writeOutput(AhoCorasick.outputList);
 		} catch (Exception e) {
 			System.out.println("writeOutput Error: "+e);
 		}
-		timer = System.currentTimeMillis() - timer;
-		System.out.println("Finish writing results in "+timer + " millisecond(s)");
 		
 		System.out.println("COMPLETED");
 		
-		// Get the Java runtime
-		Runtime runtime = Runtime.getRuntime();
-		// Run the garbage collector
-		runtime.gc();
-		// Calculate the used memory
-		long memory = runtime.totalMemory() - runtime.freeMemory();
-		System.out.println("Used memory is bytes: " + memory);
+		try {
+		    PrintWriter preprocessTimerWriter = new PrintWriter(new BufferedWriter(new FileWriter("preprocessTimerAhoCorasick.txt", true)));
+		    preprocessTimerWriter.println(""+preprocessingTimer);
+		    preprocessTimerWriter.close();
+		    PrintWriter preprocessMemoryWriter = new PrintWriter(new BufferedWriter(new FileWriter("preprocessMemoryAhoCorasick.txt", true)));
+		    preprocessMemoryWriter.println(""+preprocessingMemory);
+		    preprocessMemoryWriter.close();
+		    PrintWriter processTimerWriter = new PrintWriter(new BufferedWriter(new FileWriter("processTimerAhoCorasick.txt", true)));
+		    processTimerWriter.println(""+processingTimer);
+		    processTimerWriter.close();
+		} catch (IOException e) {
+		    //exception handling left as an exercise for the reader
+		}
+		
 	}
 	
 }
