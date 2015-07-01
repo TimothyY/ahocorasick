@@ -24,6 +24,9 @@ public class MainUI {
 		HashSet<String> keywords = new HashSet<String>(); //prepare keywords
 		try {
 			switch (args[0]) {
+			case "50":
+				f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword0050.txt");
+				break;
 			case "100":
 				f = new File("src/timothyyudi/ahocorasick/asset/snortruleskeyword0100.txt");
 				break;
