@@ -1,1 +1,4 @@
-|FF|SMB
+/bigconf.cgi
+/statsconfig.pl
+ClassCDDBControl.CddbSegments
+connect
