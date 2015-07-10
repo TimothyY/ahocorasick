@@ -36,8 +36,8 @@ public class AhoCorasick {
 				columnNumberCounter=1;
 			}
 			
-			algoStart=System.currentTimeMillis();
-			
+			algoStart=System.nanoTime();
+//			algoStart=System.currentTimeMillis();
 			while (goTo(currState, Character.toString(inputString.charAt(i)))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
 				currState= failFrom(currState);
 			}
@@ -45,9 +45,11 @@ public class AhoCorasick {
 				currState = goTo(currState, Character.toString(inputString.charAt(i))); //set the current node to the result of go to function
 				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 			}
-			algoEnd=System.currentTimeMillis();
+			algoEnd=System.nanoTime();
+//			algoEnd=System.currentTimeMillis();
 			ahoCorasickTimeFragment=algoEnd-algoStart;
 			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
+
 		}
 		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
 	}
