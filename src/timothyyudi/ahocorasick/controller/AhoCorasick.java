@@ -27,8 +27,10 @@ public class AhoCorasick {
 		currState = root;
 		lineNumberCounter=1;
 		columnNumberCounter=1;
+		int inputStringLength = inputString.length();
 		
-		for (int i = 0; i < inputString.length(); i++) { //as long as there is an input
+		algoStart=System.nanoTime();
+		for (int i = 0; i < inputStringLength; i++) { //as long as there is an input
 			
 			columnNumberCounter++;
 			if(inputString.charAt(i)=='\n'){
@@ -36,7 +38,7 @@ public class AhoCorasick {
 				columnNumberCounter=1;
 			}
 			
-			algoStart=System.nanoTime();
+//			algoStart=System.nanoTime();
 //			algoStart=System.currentTimeMillis();
 			while (goTo(currState, Character.toString(inputString.charAt(i)))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
 				currState= failFrom(currState);
@@ -45,13 +47,15 @@ public class AhoCorasick {
 				currState = goTo(currState, Character.toString(inputString.charAt(i))); //set the current node to the result of go to function
 				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 			}
-			algoEnd=System.nanoTime();
+//			algoEnd=System.nanoTime();
 //			algoEnd=System.currentTimeMillis();
-			ahoCorasickTimeFragment=algoEnd-algoStart;
-			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
+//			ahoCorasickTimeFragment=algoEnd-algoStart;
+//			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
 
 		}
-		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
+		algoEnd=System.nanoTime();
+//		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
+		Utility.writeAhoCorasickTime(algoEnd-algoStart);
 	}
 	
 	/**A function to move from 1 node of a trie to the others based on next input character*/
