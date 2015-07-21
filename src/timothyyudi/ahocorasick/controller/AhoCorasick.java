@@ -51,8 +51,8 @@ public class AhoCorasick {
 			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
 
 		}
-//		algoEnd=System.nanoTime();
 		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
+//		algoEnd=System.nanoTime();
 //		Utility.writeAhoCorasickTime(algoEnd-algoStart);
 	}
 	
