@@ -1,5 +1,9 @@
 package timothyyudi.ahocorasick.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,37 +27,43 @@ public class AhoCorasick {
 	public static ArrayList<Output> outputList = new ArrayList<>();
 	
 	/**A function to match input string against constructed AhoCorasick trie*/
-	public void patternMatching(String inputString){
+	public void patternMatching(File inputFile){
 		currState = root;
 		lineNumberCounter=1;
 		columnNumberCounter=1;
-		int inputStringLength = inputString.length();
+		int intBuf = 0;
+		String sBuf = "";
+		char cBuf;
 		
-//		algoStart=System.nanoTime();
-		for (int i = 0; i < inputStringLength; i++) { //as long as there is an input
-			
-			columnNumberCounter++;
-			if(inputString.charAt(i)=='\n'){
-				lineNumberCounter++;
-				columnNumberCounter=1;
+		algoStart=System.nanoTime();
+		try {
+			FileReader fileReader = new FileReader(inputFile);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			bufferedReader.readLine();
+			while ((intBuf = bufferedReader.read()) != -1) {
+				cBuf = (char)intBuf;
+				sBuf = String.valueOf(cBuf);
+				
+				columnNumberCounter++;
+				if(cBuf=='\n'){
+					lineNumberCounter++;
+					columnNumberCounter=1;
+				}
+				
+				while (goTo(currState, sBuf)==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
+					currState= failFrom(currState);
+				}
+				if(goTo(currState, sBuf)!=null){
+					currState = goTo(currState, sBuf); //set the current node to the result of go to function
+					prepareOutput(currState,lineNumberCounter, columnNumberCounter);
+				}
 			}
-			
-			algoStart=System.nanoTime();
-			while (goTo(currState, Character.toString(inputString.charAt(i)))==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
-				currState= failFrom(currState);
-			}
-			if(goTo(currState, Character.toString(inputString.charAt(i)))!=null){
-				currState = goTo(currState, Character.toString(inputString.charAt(i))); //set the current node to the result of go to function
-				prepareOutput(currState,lineNumberCounter, columnNumberCounter);
-			}
-			algoEnd=System.nanoTime();
-			ahoCorasickTimeFragment=algoEnd-algoStart;
-			ahoCorasickTimeTotal+=ahoCorasickTimeFragment;
-
+			fileReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
-//		algoEnd=System.nanoTime();
-//		Utility.writeAhoCorasickTime(algoEnd-algoStart);
+		algoEnd = System.nanoTime();
+		Utility.writeAhoCorasickTime(algoEnd-algoStart);
 		
 	}
 	

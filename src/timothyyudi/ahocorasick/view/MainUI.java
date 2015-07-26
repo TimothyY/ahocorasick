@@ -20,7 +20,7 @@ public class MainUI {
 	public static void main(String[] args){
 		
 		Utility util = new Utility();
-		File f;
+		File f = null;
 		HashSet<String> keywords = new HashSet<String>(); //prepare keywords
 //		String asset_Home = "src/timothyyudi/ahocorasick/asset/"; //to run anywhere
 		String asset_Home = "C:\\Java AhoCorasick\\Asset\\"; //to run externally
@@ -316,6 +316,8 @@ public class MainUI {
 		long preprocessingMemory = runtime.totalMemory() - runtime.freeMemory();
 		System.out.println("Used memory for preprocessing: " + preprocessingMemory+" Bytes");
 		
+		System.out.println("Aho Corasick is READY....BEGIN pattern matching...");
+		
 		String inputString="";	//prepare input string
 		try {
 //			f = new File(asset_Home+"kjv.txt");
@@ -329,20 +331,18 @@ public class MainUI {
 				f = new File(asset_Home+"snortrulesSimpleInputFile.txt");
 				break;
 			default:
-//				f = new File(asset_Home+"snortrulesInputFile.txt");
+				f = new File(asset_Home+"snortrulesInputFile.txt");
 //				f = new File(asset_Home+"hbot.txt");
 //				f = new File(asset_Home+"slowdownload.txt");
-				f = new File(asset_Home+"m_orange3.1.txt");
+//				f = new File(asset_Home+"m_orange3.1_100.txt");
 				break;
 			}
-			inputString = util.readInputString(f, Charset.defaultCharset());
-		} catch (IOException e) {
+			//inputString = util.readInputString(f, Charset.defaultCharset());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Aho Corasick is READY....BEGIN pattern matching...");
-		
-		ahoCorasick.patternMatching(inputString);
+		ahoCorasick.patternMatching(f);
 		
 		System.out.println("Finish multi-pattern matching in "+processingTimer + " nanosecond(s)");
 		
