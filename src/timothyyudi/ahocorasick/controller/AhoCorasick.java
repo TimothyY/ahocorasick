@@ -39,7 +39,6 @@ public class AhoCorasick {
 		try {
 			FileReader fileReader = new FileReader(inputFile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			bufferedReader.readLine();
 			while ((intBuf = bufferedReader.read()) != -1) {
 				cBuf = (char)intBuf;
 				sBuf = String.valueOf(cBuf);

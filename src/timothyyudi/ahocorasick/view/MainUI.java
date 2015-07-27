@@ -300,7 +300,6 @@ public class MainUI {
 		
 		AhoCorasick ahoCorasick = new AhoCorasick();
 		
-//		preprocessingTimer = System.currentTimeMillis();
 		preprocessingTimer = System.nanoTime();
 		ahoCorasick.prepareGoToFunction(keywords); //prepare ahocorasick goTo function
 		ahoCorasick.prepareFailFromFunction(); //prepare ahocorasick fail function
@@ -310,8 +309,6 @@ public class MainUI {
 		
 		// Get the Java runtime
 		Runtime runtime = Runtime.getRuntime();
-		// Run the garbage collector
-		runtime.gc();
 		// Calculate the used memory
 		long preprocessingMemory = runtime.totalMemory() - runtime.freeMemory();
 		System.out.println("Used memory for preprocessing: " + preprocessingMemory+" Bytes");
