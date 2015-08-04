@@ -35,11 +35,12 @@ public class AhoCorasick {
 		String sBuf = "";
 		char cBuf;
 		
-		algoStart=System.nanoTime();
+//		algoStart=System.nanoTime();
 		try {
 			FileReader fileReader = new FileReader(inputFile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			while ((intBuf = bufferedReader.read()) != -1) {
+				algoStart=System.nanoTime();
 				cBuf = (char)intBuf;
 				sBuf = String.valueOf(cBuf);
 				
@@ -56,14 +57,16 @@ public class AhoCorasick {
 					currState = goTo(currState, sBuf); //set the current node to the result of go to function
 					prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 				}
+				algoEnd = System.nanoTime();
+				ahoCorasickTimeTotal+=(algoEnd-algoStart);
 			}
 			fileReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		algoEnd = System.nanoTime();
-		Utility.writeAhoCorasickTime(algoEnd-algoStart);
-		
+//		algoEnd = System.nanoTime();
+//		Utility.writeAhoCorasickTime(algoEnd-algoStart);
+		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
 	}
 	
 	/**A function to move from 1 node of a trie to the others based on next input character*/
