@@ -6,13 +6,12 @@ public class State {
 
 	String stateContentCharacter;
 	String fullKeyword;
-	State parent, failState;
+	State failState;
 	HashMap<String, State> nextStateCollection;
 	
 	/**Called when root is created.*/
 	public State(){
 		super();
-		this.parent = null;
 		this.stateContentCharacter = null;
 		this.failState = null;
 		this.fullKeyword = null;
@@ -20,9 +19,8 @@ public class State {
 	}
 
 	/**Called each time a new state is created*/
-	public State(State parent, String stateContentCharacter, State failState){
+	public State(String stateContentCharacter, State failState){
 		super();
-		this.parent = parent;
 		this.stateContentCharacter = stateContentCharacter;
 		this.failState = failState;
 		this.fullKeyword = null;
@@ -43,14 +41,6 @@ public class State {
 
 	public void setFullKeyword(String fullKeyword) {
 		this.fullKeyword = fullKeyword;
-	}
-
-	public State getParent() {
-		return parent;
-	}
-
-	public void setParent(State parent) {
-		this.parent = parent;
 	}
 
 	public State getFailState() {
