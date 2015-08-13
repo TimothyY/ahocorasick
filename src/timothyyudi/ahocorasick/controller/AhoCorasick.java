@@ -100,10 +100,12 @@ public class AhoCorasick {
 		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))==null){ //while state doesnt exist then create new node and go there
 			currState.getNextStateCollection().put(Character.toString(keyword.charAt(keywordInsertionCounter)), new State(Character.toString(keyword.charAt(keywordInsertionCounter)), root));
 			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
-			if(keywordInsertionCounter==keyword.length()-1){
-				currState.setFullKeyword(keyword);
-			}
+			
 			keywordInsertionCounter++;
+		}
+		
+		if(keywordInsertionCounter==keyword.length()){
+			currState.setFullKeyword(keyword);
 		}
 	}
 	
