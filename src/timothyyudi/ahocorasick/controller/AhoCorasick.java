@@ -40,7 +40,6 @@ public class AhoCorasick {
 			FileReader fileReader = new FileReader(inputFile);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			while ((intBuf = bufferedReader.read()) != -1) {
-//				algoStart=System.nanoTime();
 				cBuf = (char)intBuf;
 				sBuf = String.valueOf(cBuf);
 				
@@ -57,8 +56,6 @@ public class AhoCorasick {
 					currState = goTo(currState, sBuf); //set the current node to the result of go to function
 					prepareOutput(currState,lineNumberCounter, columnNumberCounter);
 				}
-//				algoEnd = System.nanoTime();
-//				ahoCorasickTimeTotal+=(algoEnd-algoStart);
 			}
 			fileReader.close();
 		} catch (IOException e) {
