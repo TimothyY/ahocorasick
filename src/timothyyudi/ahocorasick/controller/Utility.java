@@ -25,28 +25,9 @@ public class Utility {
 
 		try {
 			scanner = new Scanner(f);
-			
 			while (scanner.hasNextLine()){
 				String tempStr = scanner.nextLine().trim();
 				list.add(tempStr); //ambil per spasi.
-				
-//				String temp;
-//				int firstQuotes=0, secondQuotes=0, thirdQuotes=0, fourthQuotes=0;
-//			while (scanner.hasNextLine()){
-//			    temp = scanner.nextLine();
-//			    firstQuotes=temp.indexOf("\"")+1;
-////			    secondQuotes=temp.indexOf("\"", firstQuotes); //to be used on snort rules message [TEMP]
-//			    secondQuotes=temp.indexOf("\"", firstQuotes)+1; //to be used in snort rules content
-//			    thirdQuotes=temp.indexOf("\"", secondQuotes)+1;
-//			    fourthQuotes=temp.indexOf("\"", thirdQuotes);
-//			    if(firstQuotes!=0){
-////			    	list.add(temp.substring(firstQuotes, secondQuotes).trim()); //to be used on snort rules message [TEMP]
-//					String tempStr = temp.substring(thirdQuotes, fourthQuotes).trim();
-//			    	if(tempStr.length()>6){
-//			    		list.add(tempStr); //ambil per spasi.
-//			    		System.out.println("inserting "+tempStr);
-//			    	}
-//			    }
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
