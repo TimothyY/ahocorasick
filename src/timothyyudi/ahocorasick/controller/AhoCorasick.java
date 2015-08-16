@@ -26,6 +26,72 @@ public class AhoCorasick {
 	
 	public static ArrayList<Output> outputList = new ArrayList<>();
 	
+	/**A function to move from 1 node of a trie to the others based on next input character*/
+	private State goTo(State node, String nextInputChar){
+		return node.getNextStateCollection().get(nextInputChar);
+	}
+	
+	/**Prepare AhoCorasick goto function/ successful state of AhoCorasick trie*/
+	public void prepareGoToFunction(HashSet<String> keywords){
+		for (String string : keywords) {
+			enterKeyword(string);
+		}
+	}
+	
+	/**insert keywords to trie*/
+	private void enterKeyword(String keyword){
+		currState = root;
+		keywordInsertionCounter = 0;
+
+		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))!=null){ //while state already exist then go there.
+			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
+			keywordInsertionCounter++;
+		}
+	
+		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))==null){ //while state doesnt exist then create new node and go there
+			currState.getNextStateCollection().put(Character.toString(keyword.charAt(keywordInsertionCounter)), new State(Character.toString(keyword.charAt(keywordInsertionCounter)), root));
+			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
+			
+			keywordInsertionCounter++;
+		}
+		
+		if(keywordInsertionCounter==keyword.length()){
+			currState.setFullKeyword(keyword);
+		}
+	}
+	
+	/**A function to move from 1 node of a trie to it's fail node*/
+	private State failFrom(State node){
+		tempOutputStr="";
+		return node.getFailState();
+	}
+	
+	/**Create the fail fall back state of AhoCorasick trie*/
+	public void prepareFailFromFunction(){
+		LinkedList<State> queue = new LinkedList<State>(); //a linked list is needed for BFS
+		
+		for (State state : root.getNextStateCollection().values()) {
+			queue.add(state);
+			state.setFailState(root);
+		}
+		
+		State tempState;
+		
+		while(!queue.isEmpty()){
+			tempState = queue.pop(); //pop node and get the childrens
+			for (State state: tempState.getNextStateCollection().values()) { //implementation differ based on nextStateCollection data structure
+				queue.add(state);
+				currState=failFrom(tempState);
+				while(goTo(currState, state.getStateContentCharacter())==null&&!currState.equals(root)){ //while fail 
+					currState = failFrom(currState); //current state = failState	
+				}//exit while when found a match from goTo of a failState or when it reach root
+				if(goTo(currState, state.getStateContentCharacter())!=null){
+					state.setFailState(goTo(currState, state.getStateContentCharacter()));
+				}
+			}
+		}
+	}
+	
 	/**A function to match input string against constructed AhoCorasick trie*/
 	public void patternMatching(File inputFile){
 		currState = root;
@@ -64,72 +130,6 @@ public class AhoCorasick {
 		algoEnd = System.nanoTime();
 		Utility.writeAhoCorasickTime(algoEnd-algoStart);
 //		Utility.writeAhoCorasickTime(ahoCorasickTimeTotal);
-	}
-	
-	/**A function to move from 1 node of a trie to the others based on next input character*/
-	private State goTo(State node, String nextInputChar){
-		return node.getNextStateCollection().get(nextInputChar);
-	}
-	
-	/**A function to move from 1 node of a trie to it's fail node*/
-	private State failFrom(State node){
-		tempOutputStr="";
-		return node.getFailState();
-	}
-	
-	/**Prepare AhoCorasick goto function/ successful state of AhoCorasick trie*/
-	public void prepareGoToFunction(HashSet<String> keywords){
-		for (String string : keywords) {
-			enterKeyword(string);
-		}
-	}
-	
-	/**insert keywords to trie*/
-	private void enterKeyword(String keyword){
-		currState = root;
-		keywordInsertionCounter = 0;
-
-		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))!=null){ //while state already exist then go there.
-			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
-			keywordInsertionCounter++;
-		}
-	
-		while(keywordInsertionCounter<keyword.length() && goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)))==null){ //while state doesnt exist then create new node and go there
-			currState.getNextStateCollection().put(Character.toString(keyword.charAt(keywordInsertionCounter)), new State(Character.toString(keyword.charAt(keywordInsertionCounter)), root));
-			currState = goTo(currState, Character.toString(keyword.charAt(keywordInsertionCounter)));
-			
-			keywordInsertionCounter++;
-		}
-		
-		if(keywordInsertionCounter==keyword.length()){
-			currState.setFullKeyword(keyword);
-		}
-	}
-	
-	/**Create the fail fall back state of AhoCorasick trie*/
-	public void prepareFailFromFunction(){
-		LinkedList<State> queue = new LinkedList<State>(); //a linked list is needed for BFS
-		
-		for (State state : root.getNextStateCollection().values()) {
-			queue.add(state);
-			state.setFailState(root);
-		}
-		
-		State tempState;
-		
-		while(!queue.isEmpty()){
-			tempState = queue.pop(); //pop node and get the childrens
-			for (State state: tempState.getNextStateCollection().values()) { //implementation differ based on nextStateCollection data structure
-				queue.add(state);
-				currState=failFrom(tempState);
-				while(goTo(currState, state.getStateContentCharacter())==null&&!currState.equals(root)){ //while fail 
-					currState = failFrom(currState); //current state = failState	
-				}//exit while when found a match from goTo of a failState or when it reach root
-				if(goTo(currState, state.getStateContentCharacter())!=null){
-					state.setFailState(goTo(currState, state.getStateContentCharacter()));
-				}
-			}
-		}
 	}
 	
 	/**prepare output for the matching keywords found*/

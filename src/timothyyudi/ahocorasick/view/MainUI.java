@@ -279,7 +279,8 @@ public class MainUI {
 				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemorykjvcustom.txt";
 				break;
 			default:
-				f = new File(asset_Home+"snortrulessimplekeyword.txt");
+//				f = new File(asset_Home+"snortrulessimplekeyword.txt");
+				f = new File(asset_Home+"snortruleskeyword0100.txt");
 				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTimeSimple.txt";
 				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTimeSimple.txt";
 				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemorySimple.txt";
@@ -312,7 +313,6 @@ public class MainUI {
 		
 		System.out.println("Aho Corasick is READY....BEGIN pattern matching...");
 		
-		String inputString="";	//prepare input string
 		try {
 //			f = new File(asset_Home+"kjv.txt");
 //			f = new File(asset_Home+"kjv_bug.txt");			
