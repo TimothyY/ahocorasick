@@ -109,11 +109,11 @@ public class AhoCorasick {
 				cBuf = (char)intBuf;
 				sBuf = String.valueOf(cBuf);
 				
-				columnNumberCounter++;
-				if(cBuf=='\n'){
-					lineNumberCounter++;
-					columnNumberCounter=1;
-				}
+//				columnNumberCounter++;
+//				if(cBuf=='\n'){
+//					lineNumberCounter++;
+//					columnNumberCounter=1;
+//				}
 				
 				while (goTo(currState, sBuf)==null&&!currState.equals(root)) { //repeat fail function as long goTo function is failing
 					currState= failFrom(currState);
