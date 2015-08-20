@@ -280,7 +280,7 @@ public class MainUI {
 				break;
 			default:
 //				f = new File(asset_Home+"snortrulessimplekeyword.txt");
-				f = new File(asset_Home+"snortruleskeyword0100.txt");
+				f = new File(asset_Home+"snortruleskeyword0200.txt");
 				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTimeSimple.txt";
 				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTimeSimple.txt";
 				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemorySimple.txt";
@@ -325,10 +325,10 @@ public class MainUI {
 				f = new File(asset_Home+"snortrulesSimpleInputFile.txt");
 				break;
 			default:
-				f = new File(asset_Home+"snortrulesInputFile.txt");
+//				f = new File(asset_Home+"snortrulesInputFile.txt");
 //				f = new File(asset_Home+"hbot.txt");
 //				f = new File(asset_Home+"slowdownload.txt");
-//				f = new File(asset_Home+"m_orange3.1_100.txt");
+				f = new File(asset_Home+"m_orange3.1_100.txt");
 				break;
 			}
 			//inputString = util.readInputString(f, Charset.defaultCharset());
