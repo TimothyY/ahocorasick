@@ -280,7 +280,11 @@ public class MainUI {
 				break;
 			default:
 //				f = new File(asset_Home+"snortrulessimplekeyword.txt");
-				f = new File(asset_Home+"snortruleskeyword4000.txt");
+//				f = new File(asset_Home+"snortruleskeyword4000.txt");
+//				f = new File(asset_Home+"below20_0200.txt");
+//				f = new File(asset_Home+"below20_1000.txt");
+//				f = new File(asset_Home+"above20_0200.txt");
+				f = new File(asset_Home+"above20_1000.txt");
 				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTimeSimple.txt";
 				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTimeSimple.txt";
 				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemorySimple.txt";
@@ -322,7 +326,9 @@ public class MainUI {
 				f = new File(asset_Home+"kjv_custom.txt");
 				break;
 			case "simple":
-				f = new File(asset_Home+"snortrulesSimpleInputFile.txt");
+//				f = new File(asset_Home+"snortrulesSimpleInputFile.txt");
+				f = new File(asset_Home+"snortrulesInputFile.txt");
+//				f = new File(asset_Home+"m_orange3.1_100.txt");
 				break;
 			default:
 //				f = new File(asset_Home+"snortrulesInputFile.txt");
