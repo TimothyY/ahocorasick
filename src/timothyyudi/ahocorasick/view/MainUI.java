@@ -304,33 +304,33 @@ public class MainUI {
 				break;
 			case "above20_200":
 				f = new File(asset_Home+"above20_0200.txt");
-				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Below20_200.txt";
-				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Below20_200.txt";
-				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Below20_200.txt";
+				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Above20_200.txt";
+				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Above20_200.txt";
+				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Above20_200.txt";
 				break;
 			case "above20_400":
 				f = new File(asset_Home+"above20_0400.txt");
-				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Below20_400.txt";
-				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Below20_400.txt";
-				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Below20_400.txt";
+				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Above20_400.txt";
+				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Above20_400.txt";
+				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Above20_400.txt";
 				break;
 			case "above20_600":
 				f = new File(asset_Home+"above20_0600.txt");
-				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Below20_600.txt";
-				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Below20_600.txt";
-				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Below20_600.txt";
+				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Above20_600.txt";
+				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Above20_600.txt";
+				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Above20_600.txt";
 				break;
 			case "above20_800":
 				f = new File(asset_Home+"above20_0800.txt");
-				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Below20_800.txt";
-				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Below20_800.txt";
-				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Below20_800.txt";
+				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Above20_800.txt";
+				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Above20_800.txt";
+				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Above20_800.txt";
 				break;
 			case "above20_1000":
 				f = new File(asset_Home+"above20_1000.txt");
-				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Below20_1000.txt";
-				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Below20_1000.txt";
-				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Below20_1000.txt";
+				output_PreProcessTimeURI = output_Home+"AhoCorasick_PreProcessTime_Above20_1000.txt";
+				output_InProcessTimeURI = output_Home+"AhoCorasick_InProcessTime_Above20_1000.txt";
+				output_ProcessMemoryURI = output_Home+"AhoCorasick_ProcessMemory_Above20_1000.txt";
 				break;
 			case "kjvcustom":
 				f = new File(asset_Home+"snortruleskeyword4000.txt");
